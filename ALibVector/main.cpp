@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 
+using namespace ALib;
+
 int main()
 {
     Vector<std::string> vec;
