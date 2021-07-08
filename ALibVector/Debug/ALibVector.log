@@ -1,24 +1,2 @@
 ﻿  main.cpp
-D:\docs\githubRepo\ALibVector\ALibVector\vector.h(93,26): warning C4018: '>': signed/unsigned mismatch
-D:\docs\githubRepo\ALibVector\ALibVector\vector.h(92): message : while compiling class template member function 'T &ALib::Vector<T>::at(int)'
-          with
-          [
-              T=std::string
-          ]
-D:\docs\githubRepo\ALibVector\ALibVector\vector.h(87): message : see reference to function template instantiation 'T &ALib::Vector<T>::at(int)' being compiled
-          with
-          [
-              T=std::string
-          ]
-D:\docs\githubRepo\ALibVector\ALibVector\vector.h(59): message : while compiling class template member function 'void ALib::Vector<std::string>::pushBack(T)'
-          with
-          [
-              T=std::string
-          ]
-D:\docs\githubRepo\ALibVector\ALibVector\main.cpp(13): message : see reference to function template instantiation 'void ALib::Vector<std::string>::pushBack(T)' being compiled
-          with
-          [
-              T=std::string
-          ]
-D:\docs\githubRepo\ALibVector\ALibVector\main.cpp(9): message : see reference to class template instantiation 'ALib::Vector<std::string>' being compiled
   ALibVector.vcxproj -> D:\docs\githubRepo\ALibVector\Debug\ALibVector.exe

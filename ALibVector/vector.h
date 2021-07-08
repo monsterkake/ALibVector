@@ -36,26 +36,34 @@ namespace ALib
 		unsigned int size();
 		void pushBack(T value);
 		void popBack();
+		void pushFront(T value);
 		T& operator [](int index);
 
 
 		Vector();
+		~Vector();
 	};
 
 	template <typename T>
-	Vector<T>::Vector()
+	inline Vector<T>::Vector()
+	{
+
+	}
+
+	template<typename T>
+	inline Vector<T>::~Vector()
 	{
 
 	}
 
 	template <typename T>
-	unsigned int Vector<T>::size()
+	inline unsigned int Vector<T>::size()
 	{
 		return length;
 	}
 
 	template <typename T>
-	void Vector<T>::pushBack(T value)
+	inline void Vector<T>::pushBack(T value)
 	{
 		if (lastNode != nullptr)
 		{
@@ -73,7 +81,7 @@ namespace ALib
 	}
 
 	template <typename T>
-	void Vector<T>::popBack()
+	inline void Vector<T>::popBack()
 	{
 		lastNode = lastNode->prevNode;
 		delete lastNode->nextNode;
@@ -81,14 +89,33 @@ namespace ALib
 		length--;
 	}
 
+	template<typename T>
+	inline void Vector<T>::pushFront(T value)
+	{
+		if (firstNode != nullptr) 
+		{
+			firstNode->prevNode = new Node<T>;
+			firstNode->prevNode->nextNode = firstNode;
+			firstNode = firstNode->prevNode;
+			length++;
+		}
+		else
+		{
+			firstNode = new Node<T>;
+			lastNode = firstNode;
+		}
+		*firstNode->value = value;
+		
+	}
+
 	template <typename T>
-	T& Vector<T>::operator[](int index)
+	inline T& Vector<T>::operator[](int index)
 	{
 		return at(index);
 	}
 
 	template <typename T>
-	T& Vector<T>::at(int index)
+	inline T& Vector<T>::at(int index)
 	{
 		if (index < 0 || index > length)
 		{

@@ -6,19 +6,18 @@ using namespace ALib;
 
 int main()
 {
-    Vector<std::string> vec;
+    
 
-    for (int i = 0; i < 10; i++) 
+    while (true) 
     {
-        vec.pushBack("1411");
-        std::cout << vec[i];
+        Vector<int> vec;
+        vec.pushBack(256);
     }
-    std::cout << std::endl << vec[3] << std::endl;
-    vec[3] = "51511";
-    std::cout << std::endl << vec[3] << std::endl;
+    
+
+
     system("pause");
 
-    std::vector<int> vec2;
 
     return 0;
 }
