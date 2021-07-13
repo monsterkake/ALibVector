@@ -3,6 +3,7 @@
 #include <exception>
 #include <stdexcept>
 #include <iostream>
+#include <memory>
 
 namespace ALib 
 {
@@ -10,18 +11,16 @@ namespace ALib
 	class Node
 	{
 	public:
-		T* value = new T;
-		Node<T>* prevNode = nullptr;
-		Node<T>* nextNode = nullptr;
+		std::shared_ptr<T> value = std::shared_ptr<T>(new T);
+		std::shared_ptr<Node<T>> prevNode = nullptr;
+		std::shared_ptr<Node<T>> nextNode = nullptr;
 		~Node();
 	};
 
 	template <typename T>
 	Node<T>::~Node()
 	{
-		delete value;
-		delete prevNode;
-		delete nextNode;
+
 	}
 
 	template <typename T>
@@ -29,8 +28,8 @@ namespace ALib
 	{
 	private:
 		unsigned int length = 0;
-		Node<T>* firstNode = nullptr;
-		Node<T>* lastNode = nullptr;
+		 std::shared_ptr<Node<T>> firstNode = nullptr;
+		 std::shared_ptr<Node<T>> lastNode = nullptr;
 		T& at(int index);
 	public:
 		unsigned int size();
@@ -67,16 +66,17 @@ namespace ALib
 	{
 		if (lastNode != nullptr)
 		{
-			lastNode->nextNode = new Node<T>;
+			lastNode->nextNode = std::shared_ptr<Node<T>>(new Node<T>);
 			lastNode->nextNode->prevNode = lastNode;
 			lastNode = lastNode->nextNode;
-			length++;
+			
 		}
 		else
 		{
-			lastNode = new Node<T>;
+			lastNode = std::shared_ptr<Node<T>>(new Node<T>);
 			firstNode = lastNode;
 		}
+		length++;
 		*lastNode->value = value;
 	}
 
@@ -84,8 +84,10 @@ namespace ALib
 	inline void Vector<T>::popBack()
 	{
 		lastNode = lastNode->prevNode;
-		delete lastNode->nextNode;
-		lastNode->nextNode = nullptr;
+		//delete lastNode->nextNode;
+		//lastNode->nextNode->~shared_ptr();
+		//lastNode.
+		//lastNode->nextNode = nullptr;
 		length--;
 	}
 
@@ -94,18 +96,18 @@ namespace ALib
 	{
 		if (firstNode != nullptr) 
 		{
-			firstNode->prevNode = new Node<T>;
+			firstNode->prevNode = std::shared_ptr<Node<T>>(new Node<T>);
 			firstNode->prevNode->nextNode = firstNode;
 			firstNode = firstNode->prevNode;
-			length++;
+			
 		}
 		else
 		{
-			firstNode = new Node<T>;
+			firstNode = std::shared_ptr<Node<T>>(new Node<T>);
 			lastNode = firstNode;
 		}
 		*firstNode->value = value;
-		
+		length++;
 	}
 
 	template <typename T>
@@ -123,7 +125,7 @@ namespace ALib
 			exit(0);
 		}
 
-		Node<T>* temp = firstNode;
+		std::shared_ptr<Node<T>> temp = firstNode;
 		for (int i = 0; i < index; i++)
 		{
 			temp = temp->nextNode;
